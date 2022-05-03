@@ -20,7 +20,7 @@ func main() {
 	myWindow.Resize(fyne.NewSize(400, 400))
 
 	// set header icon
-	hicon, _ := fyne.LoadResourceFromPath("image.png")
+	hicon, _ := fyne.LoadResourceFromPath("/usr/local/share/applications/src/assets/icons/logo.jpg")
 	myApp.SetIcon(hicon)
 
 	// header menu
@@ -88,21 +88,21 @@ func main() {
 		switch selectDistro.Selected {
 		case "Manjaro":
 			infinite.Start()
-			c := exec.Command("st", "-f", "30", "sh", "src/distros/Manjaro/Manjaro.sh")
+			c := exec.Command("st", "-f", "30", "sh", "/usr/local/share/applications/src/distros/Manjaro/Manjaro.sh")
 			c.Stdout = os.Stdout
 			c.Stdin = os.Stdin
 			c.Stderr = os.Stderr
 			c.Run()
 		case "Solus":
 			infinite.Start()
-			c := exec.Command("st", "-f", "30", "sh", "src/distros/Solus/Solus.sh")
+			c := exec.Command("st", "-f", "30", "sh", "/usr/local/share/applications/src/distros/Solus/Solus.sh")
 			c.Stdout = os.Stdout
 			c.Stdin = os.Stdin
 			c.Stderr = os.Stderr
 			c.Run()
 		case "Fedora":
 			infinite.Start()
-			c := exec.Command("st", "-f", "30", "sh", "src/distros/Fedora/Fedora.sh")
+			c := exec.Command("st", "-f", "30", "sh", "/usr/local/share/applications/src/distros/Fedora/Fedora.sh")
 			c.Stdout = os.Stdout
 			c.Stdin = os.Stdin
 			c.Stderr = os.Stderr
