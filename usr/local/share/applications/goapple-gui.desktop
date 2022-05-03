@@ -1,5 +1,5 @@
 [Desktop Entry]
 Type=Application
-Name=goapple-gui-test
+Name=goapple-gui
 Exec=fyne
-Icon=goapple-gui-test
+Icon=goapple-gui

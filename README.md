@@ -9,7 +9,7 @@ GUI version of [GOAPPLE-CLI](https://github.com/Avdushin/GOAPPLE), written at Go
 ```
 git clone https://github.com/Avdushin/goapple-gui
 cd goapple-gui
-./install.sh
+sudo make install
 # Click at the goapple-gui icon
 ```
 
@@ -18,9 +18,10 @@ or u can use
 1) ```
    git clone https://github.com/Avdushin/goapple-gui
    cd goapple-gui
+   ./install.sh
    ./goapple-gui
    ```
-
+   
 2) ```
    sudo make install
    ./goapple-gui
@@ -30,11 +31,7 @@ or u can use
 
  * app's menu
 
-![app.empty](src/assets/demo/app.empty.png)
-
-* select your terminal
-
-  ![app.term.select](src/assets/demo/app.term.select.png)
+![app.empty](src/assets/demo/app.dark.png)
 
 * select  distro to install
 
