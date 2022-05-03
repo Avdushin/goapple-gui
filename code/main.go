@@ -53,10 +53,10 @@ func main() {
 	infinite := widget.NewProgressBarInfinite()
 	infinite.Stop()
 
-	selectTerm := widget.NewSelect(
-		[]string{"gnome-terminal", "konsole", "xfce4-terminal", "kitty", "terminator", "xterm", "guake", "yakuake", "tilix", "cool-retro-term"}, func(s string) {
-			log.Printf("Selected Terminsla is %s", s)
-		})
+	// selectTerm := widget.NewSelect(
+	// 	[]string{"gnome-terminal", "konsole", "xfce4-terminal", "kitty", "st", "terminator", "xterm", "guake", "yakuake", "tilix", "cool-retro-term"}, func(s string) {
+	// 		log.Printf("Selected Terminsla is %s", s)
+	// 	})
 
 	// set error's text color
 	errorColor := color.NRGBA{R: 255, G: 0, B: 0, A: 255}
@@ -88,34 +88,34 @@ func main() {
 		switch selectDistro.Selected {
 		case "Manjaro":
 			infinite.Start()
-			c := exec.Command(selectTerm.Selected, "sh", "src/distros/Manjaro/Manjaro.sh")
+			c := exec.Command("st", "-f", "30", "sh", "src/distros/Manjaro/Manjaro.sh")
 			c.Stdout = os.Stdout
 			c.Stdin = os.Stdin
 			c.Stderr = os.Stderr
 			c.Run()
 		case "Solus":
 			infinite.Start()
-			c := exec.Command(selectTerm.Selected, "sh", "src/distros/Solus/Solus.sh")
+			c := exec.Command("st", "-f", "30", "sh", "src/distros/Solus/Solus.sh")
 			c.Stdout = os.Stdout
 			c.Stdin = os.Stdin
 			c.Stderr = os.Stderr
 			c.Run()
 		case "Fedora":
 			infinite.Start()
-			c := exec.Command(selectTerm.Selected, "sh", "src/distros/Fedora/Fedora.sh")
+			c := exec.Command("st", "-f", "30", "sh", "src/distros/Fedora/Fedora.sh")
 			c.Stdout = os.Stdout
 			c.Stdin = os.Stdin
 			c.Stderr = os.Stderr
 			c.Run()
 		}
 		// IsTerminal Selected check
-		switch selectTerm.Selected {
-		case "":
-			infinite.Stop()
-			errorLabel1.Show()
-		default:
-			errorLabel1.Hide()
-		}
+		// switch selectTerm.Selected {
+		// case "":
+		// 	infinite.Stop()
+		// 	errorLabel1.Show()
+		// default:
+		// 	errorLabel1.Hide()
+		// }
 		// IsDistro Selected check
 		switch selectDistro.Selected {
 		case "":
@@ -128,13 +128,13 @@ func main() {
 	})
 
 	// app label
-	label1 := widget.NewLabel("Please select your terminal:")
+	// label1 := widget.NewLabel("Please select your terminal:")
 	label2 := widget.NewLabel("Please select distro:")
 
 	myWindow.SetContent(container.NewVBox(
-		label1,
-		selectTerm,
-		errorLabel1,
+		// label1,
+		// selectTerm,
+		// errorLabel1,
 		label2,
 		selectDistro,
 		errorLabel2,
