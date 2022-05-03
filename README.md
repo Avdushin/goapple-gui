@@ -10,7 +10,7 @@ GUI version of [GOAPPLE-CLI](https://github.com/Avdushin/GOAPPLE), written at Go
 git clone https://github.com/Avdushin/goapple-gui
 cd goapple-gui
 ./install.sh
-# Click at the program icon (goapple-gui.desktop)
+# Click at the goapple-gui icon
 ```
 
 or u can use
