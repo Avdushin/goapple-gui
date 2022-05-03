@@ -4,6 +4,23 @@
 
 GUI version of [GOAPPLE-CLI](https://github.com/Avdushin/GOAPPLE), written at Go Fyne.
 
+### Dependencies
+
+`make`
+
+```
+# to install make:
+
+# Manjaro
+sudo pacman -S make
+# Solus
+sudo eopkg it make
+# Fedoras
+sudo dnf install make
+```
+
+
+
 ### How to install
 
 ```
@@ -65,4 +82,4 @@ or u can use
 
 
 
-<p align="center">2022 © <a href="https://github.com/Avdushin" target="_blank">Avdushin</a></p>
+<p align="center">2022 © <a href="https://github.com/Avdushin" target="_blank">Avdushin</a></p>имости
