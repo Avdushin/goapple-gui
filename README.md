@@ -15,7 +15,7 @@ GUI version of [GOAPPLE-CLI](https://github.com/Avdushin/GOAPPLE), written at Go
 sudo pacman -S make
 # Solus
 sudo eopkg it make
-# Fedoras
+# Fedora
 sudo dnf install make
 ```
 
