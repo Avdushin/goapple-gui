@@ -56,13 +56,13 @@ or u can use
 
 ![app.srttings.themes](src/assets/demo/app.srttings.themes.png)  ![app.light](src/assets/demo/app.light.png)
 
-* App running
+* App running ->
 
   When app is running - progress bar running! At this moment, application installing selected configuration
 
   ![app.running](src/assets/demo/app.running.png)
 
-* Error (if you don't selected termianl and distro) ->
+* Error (if you don't selected distro) ->
 
   ![app.select.errors](src/assets/demo/app.select.errors.png)
 
