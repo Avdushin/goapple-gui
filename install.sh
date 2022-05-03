@@ -1,5 +1,5 @@
 echo "INSTALLING COMPONENTS..."
-sudo pacman -S st --no-confirm
+sudo pacman -S st --noconfirm
 clear
 sudo dnf install st -y
 clear
