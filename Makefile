@@ -15,10 +15,7 @@ install:
 	install -Dm00644 usr/local/share/pixmaps/goapple-gui.jpg $(DESTDIR)$(PREFIX)/share/pixmaps/goapple-gui.jpg
 	sudo cp -rf src/ /usr/local/bin/
 	sudo cp -rf src/ /usr/local/share/applications/
-	sudo pacman -S st --no-confirm
-	sudo dnf install st -y
-	sudo eopkg it st -y
-	sudo apt install st -y
+	sh install.sh
 uninstall:
 	-rm $(DESTDIR)$(PREFIX)/share/applications/goapple-gui.desktop
 	-rm $(DESTDIR)$(PREFIX)/bin/goapple-gui
