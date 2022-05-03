@@ -82,4 +82,4 @@ or u can use
 
 
 
-<p align="center">2022 © <a href="https://github.com/Avdushin" target="_blank">Avdushin</a></p>имости
+<p align="center">2022 © <a href="https://github.com/Avdushin" target="_blank">Avdushin</a></p>

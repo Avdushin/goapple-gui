@@ -53,16 +53,8 @@ func main() {
 	infinite := widget.NewProgressBarInfinite()
 	infinite.Stop()
 
-	// selectTerm := widget.NewSelect(
-	// 	[]string{"gnome-terminal", "konsole", "xfce4-terminal", "kitty", "st", "terminator", "xterm", "guake", "yakuake", "tilix", "cool-retro-term"}, func(s string) {
-	// 		log.Printf("Selected Terminsla is %s", s)
-	// 	})
-
 	// set error's text color
 	errorColor := color.NRGBA{R: 255, G: 0, B: 0, A: 255}
-
-	errorLabel1 := canvas.NewText(" ERROR: Select the Terminal!", errorColor)
-	errorLabel1.Hide()
 
 	errorLabel2 := canvas.NewText(" ERROR: Select your distro!", errorColor)
 	errorLabel2.Hide()
@@ -108,14 +100,6 @@ func main() {
 			c.Stderr = os.Stderr
 			c.Run()
 		}
-		// IsTerminal Selected check
-		// switch selectTerm.Selected {
-		// case "":
-		// 	infinite.Stop()
-		// 	errorLabel1.Show()
-		// default:
-		// 	errorLabel1.Hide()
-		// }
 		// IsDistro Selected check
 		switch selectDistro.Selected {
 		case "":
@@ -128,13 +112,9 @@ func main() {
 	})
 
 	// app label
-	// label1 := widget.NewLabel("Please select your terminal:")
 	label2 := widget.NewLabel("Please select distro:")
 
 	myWindow.SetContent(container.NewVBox(
-		// label1,
-		// selectTerm,
-		// errorLabel1,
 		label2,
 		selectDistro,
 		errorLabel2,
