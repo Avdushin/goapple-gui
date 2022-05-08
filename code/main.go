@@ -24,8 +24,6 @@ func main() {
 	hicon, _ := fyne.LoadResourceFromPath("/usr/local/share/applications/src/assets/icons/logo.jpg")
 	myApp.SetIcon(hicon)
 
-	// $USER NAME CHECK
-
 	// Language settings
 	// english
 	fileLabel := "File"
