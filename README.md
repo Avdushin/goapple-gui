@@ -27,19 +27,22 @@ sudo dnf install make
 git clone https://github.com/Avdushin/goapple-gui
 cd goapple-gui
 sudo make install
-# Click at the goapple-gui icon
+# Click at the goapple-gui icon or 
+goapple-gui
 ```
 
 or u can use
 
-1) ```
+1) 
+  ```
    git clone https://github.com/Avdushin/goapple-gui
    cd goapple-gui
    ./install.sh
    ./goapple-gui
    ```
    
-2) ```
+2) 
+  ```
    sudo make install
    ./goapple-gui
    ```

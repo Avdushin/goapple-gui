@@ -2,6 +2,7 @@ package main
 
 import (
 	"image/color"
+	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
@@ -17,24 +18,124 @@ import (
 func main() {
 	myApp := app.New()
 	myWindow := myApp.NewWindow("GOAPPLE-GUI")
-	myWindow.Resize(fyne.NewSize(400, 400))
+	myWindow.Resize(fyne.NewSize(430, 370))
 
 	// set header icon
 	hicon, _ := fyne.LoadResourceFromPath("/usr/local/share/applications/src/assets/icons/logo.jpg")
 	myApp.SetIcon(hicon)
 
-	// header menu
+	// $USER NAME CHECK
 
-	about := fyne.NewMenuItem("About", func() {
+	// Language settings
+	// english
+	fileLabel := "File"
+	aboutLabel := "About"
+	settingsLabel := "Settings"
+	themeLabel := "Theme"
+	darkThemeLabel := "Dark Theme"
+	LightThemeLabel := "Light Theme"
+	setupBTNLabel := "SETUP"
+	errorDistroLabel := " ERROR: Select your distro!"
+	errorLanguageLabel := " PLEASE RESTART THE APPLICATION!"
+	langLabel := "Language"
+	ruLangLabel := "Russian"
+	enLangLabel := "English"
+	label2Label := "Please select distro:"
+
+	// header menu
+	about := fyne.NewMenuItem(aboutLabel, func() {
 		url := "https://github.com/avdushin"
 		exec.Command("xdg-open", url).Start()
 	})
 
-	Theme := fyne.NewMenuItem("Theme", nil)
+	file_data, err := ioutil.ReadFile("/etc/goapple-gui/language.txt")
+	if err != nil {
+		log.Fatal("I can't to read :(\n Sry Man... One Second!")
+		e := ioutil.WriteFile("/etc/goapple-gui/language.txt", []byte("true"), 0777)
+		if e != nil {
+			log.Fatal(e)
+		}
+	}
+
+	var Languager bool // bool language
+
+	switch string(file_data) {
+	case "false":
+		Languager = false
+		log.Printf("English Language is %t", Languager)
+		fileLabel = "Файл"
+		aboutLabel = "О проекте"
+		settingsLabel = "Настройки"
+		themeLabel = "Тема"
+		darkThemeLabel = "Темная тема"
+		LightThemeLabel = "Светлая тема"
+		setupBTNLabel = "УСТАНОВИТЬ"
+		errorDistroLabel = " ОШИБКА: Вы не выбрали дистрибутив!"
+		label2Label = "Выберите дистрибутив для установки:"
+		errorLanguageLabel = " ПЕРЕЗАПУСТИТЕ ПРИЛОЖЕНИЕ,ЧТОБЫ СМЕНИТЬ ЯЗЫК!"
+	case "true":
+		Languager = true
+		log.Printf("English Language is %t", Languager)
+		fileLabel = "File"
+		aboutLabel = "About"
+		settingsLabel = "Settings"
+		themeLabel = "Theme"
+		darkThemeLabel = "Dark Theme"
+		LightThemeLabel = "Light Theme"
+		setupBTNLabel = "SETUP"
+		errorDistroLabel = " ERROR Select your distro!"
+		langLabel = "Language"
+		ruLangLabel = "Russian"
+		enLangLabel = "English"
+		label2Label = "Please select distro:"
+		errorLanguageLabel = " PLEASE RESTART THE APPLICATION!"
+	}
+
+	// set error's text color
+	errorColor := color.NRGBA{R: 255, G: 0, B: 0, A: 255}
+
+	errorLanguage := canvas.NewText(errorLanguageLabel, errorColor)
+	errorLanguage.Hide()
+	// lang Menu item
+	lang := fyne.NewMenuItem(langLabel, nil)
+
+	ruLang := fyne.NewMenuItem(ruLangLabel, func() {
+		e := ioutil.WriteFile("/etc/goapple-gui/language.txt", []byte("false"), 0777)
+		if err != nil {
+			log.Fatal(e)
+		}
+		file_data, err := ioutil.ReadFile("/etc/goapple-gui/language.txt")
+		if err != nil {
+			log.Fatal("Can't to read language settings file")
+		}
+		log.Print(string(file_data))
+		log.Print(string("/etc/goapple-gui/language.txt"))
+		errorLanguage.Show()
+	})
+	enLang := fyne.NewMenuItem(enLangLabel, func() {
+		e := ioutil.WriteFile("/etc/goapple-gui/language.txt", []byte("true"), 0777)
+		if err != nil {
+			log.Fatal(e)
+		}
+		file_data, err := ioutil.ReadFile("/etc/goapple-gui/language.txt")
+		if err != nil {
+			log.Fatal("Can't to read language settings file")
+		}
+		log.Print(string(file_data))
+		errorLanguage.Show()
+	})
+
+	lang.ChildMenu = fyne.NewMenu(
+		"",
+		ruLang,
+		enLang,
+	)
 
 	// Themes menu
-	dark := fyne.NewMenuItem("Dark Theme", func() { myApp.Settings().SetTheme(theme.DarkTheme()) })
-	light := fyne.NewMenuItem("Light Theme", func() { myApp.Settings().SetTheme(theme.LightTheme()) })
+	Theme := fyne.NewMenuItem(themeLabel, nil)
+
+	dark := fyne.NewMenuItem(darkThemeLabel, func() { myApp.Settings().SetTheme(theme.DarkTheme()) })
+	light := fyne.NewMenuItem(LightThemeLabel, func() { myApp.Settings().SetTheme(theme.LightTheme()) })
 
 	Theme.ChildMenu = fyne.NewMenu(
 		"",
@@ -42,21 +143,19 @@ func main() {
 		light,
 	)
 
-	FileMenu := fyne.NewMenu("File", about)
-	SettingsMenu := fyne.NewMenu("Settings", Theme)
+	FileMenu := fyne.NewMenu(fileLabel, about)
+	SettingsMenu := fyne.NewMenu(settingsLabel, Theme, lang)
 
 	// main menu
 	menu := fyne.NewMainMenu(FileMenu, SettingsMenu)
 	// setup menu
 	myWindow.SetMainMenu(menu)
+
 	// progress bar
 	infinite := widget.NewProgressBarInfinite()
 	infinite.Stop()
 
-	// set error's text color
-	errorColor := color.NRGBA{R: 255, G: 0, B: 0, A: 255}
-
-	errorLabel2 := canvas.NewText(" ERROR: Select your distro!", errorColor)
+	errorLabel2 := canvas.NewText(errorDistroLabel, errorColor)
 	errorLabel2.Hide()
 
 	errorLabel3 := widget.NewLabel("IF THE TERMINAL WINDOW DOES NOT APPEAR - SELECT ANOTHER TERMINAL FROM THE LIST")
@@ -68,15 +167,7 @@ func main() {
 			log.Printf("Selected distro : %s", distro)
 		})
 
-	// stopBTN := widget.NewButton("STOP", func() {
-	// 	kill := exec.Command("killall", selectTerm.Selected, "sh", selectDistro.Selected)
-	// 	kill.Stdout = os.Stdout
-	// 	kill.Stdin = os.Stdin
-	// 	kill.Stderr = os.Stderr
-	// 	kill.Run()
-	// })
-
-	setupBTN := widget.NewButton("SETUP", func() {
+	setupBTN := widget.NewButton(setupBTNLabel, func() {
 		switch selectDistro.Selected {
 		case "Manjaro":
 			infinite.Start()
@@ -112,9 +203,10 @@ func main() {
 	})
 
 	// app label
-	label2 := widget.NewLabel("Please select distro:")
+	label2 := widget.NewLabel(label2Label)
 
 	myWindow.SetContent(container.NewVBox(
+		errorLanguage,
 		label2,
 		selectDistro,
 		errorLabel2,
