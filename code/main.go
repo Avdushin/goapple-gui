@@ -156,10 +156,6 @@ func main() {
 	errorLabel2 := canvas.NewText(errorDistroLabel, errorColor)
 	errorLabel2.Hide()
 
-	errorLabel3 := widget.NewLabel("IF THE TERMINAL WINDOW DOES NOT APPEAR - SELECT ANOTHER TERMINAL FROM THE LIST")
-	errorLabel3.Wrapping = fyne.TextWrapBreak
-	errorLabel3.Hide()
-
 	selectDistro := widget.NewSelect(
 		[]string{"Manjaro", "Solus", "Fedora"}, func(distro string) {
 			log.Printf("Selected distro : %s", distro)
@@ -196,7 +192,6 @@ func main() {
 			errorLabel2.Show()
 		default:
 			errorLabel2.Hide()
-			errorLabel3.Show()
 		}
 	})
 
@@ -210,7 +205,6 @@ func main() {
 		errorLabel2,
 		setupBTN,
 		infinite,
-		errorLabel3,
 	))
 	myWindow.ShowAndRun()
 }
