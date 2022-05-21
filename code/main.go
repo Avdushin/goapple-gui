@@ -165,21 +165,21 @@ func main() {
 		switch selectDistro.Selected {
 		case "Manjaro":
 			infinite.Start()
-			c := exec.Command("st", "-f", "30", "sh", "/usr/local/share/applications/src/distros/Manjaro/Manjaro.sh")
+			c := exec.Command("st", "-f", "30", "sh", "/usr/local/share/applications/src/distros/Manjaro/manjaro.sh")
 			c.Stdout = os.Stdout
 			c.Stdin = os.Stdin
 			c.Stderr = os.Stderr
 			c.Run()
 		case "Solus":
 			infinite.Start()
-			c := exec.Command("st", "-f", "30", "sh", "/usr/local/share/applications/src/distros/Solus/Solus.sh")
+			c := exec.Command("st", "-f", "30", "sh", "/usr/local/share/applications/src/distros/Solus/solus.sh")
 			c.Stdout = os.Stdout
 			c.Stdin = os.Stdin
 			c.Stderr = os.Stderr
 			c.Run()
 		case "Fedora":
 			infinite.Start()
-			c := exec.Command("st", "-f", "30", "sh", "/usr/local/share/applications/src/distros/Fedora/Fedora.sh")
+			c := exec.Command("st", "-f", "30", "sh", "/usr/local/share/applications/src/distros/Fedora/fedora.sh")
 			c.Stdout = os.Stdout
 			c.Stdin = os.Stdin
 			c.Stderr = os.Stderr
